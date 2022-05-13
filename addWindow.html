@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add</title>
+</head>
+<body>
+
+    <form>
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id="title" autofocus>
+        </div>
+        <button type="submit">Save</button>
+    </form>
+
+    <script>
+        const electron = require('electron');
+        const {ipcRenderer} = electron;
+        const form = document.querySelector('form');
+        form.addEventListener('submit', submitForm);
+        function submitForm(e){
+            e.preventDefault();
+            const title = document.querySelector('#title').value;
+            ipcRenderer.send('item:add',title);
+            console.log(title);
+        }
+    </script>
+</body>
+</html>
